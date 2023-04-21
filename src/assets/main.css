@@ -1,0 +1,12 @@
+html {
+  padding: 0;
+  margin: 0;
+  font-family:  Arial, Helvetica, sans-serif;
+  color: rgb(58, 58, 58);
+  height: 100vh;
+  background-color: rgb(66, 203, 199);
+}
+
+body {
+  margin-top: 3rem;
+}

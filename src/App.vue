@@ -8,7 +8,9 @@ const todos = ref([])
 
 // Se actualiza automáticamente en la interfaz de usuario con la funcionalidad reactiva.
 function handleAddNewTodo(todo) {
-  todos.value.push(todo)
+  if (todo) {
+    todos.value.push(todo)
+  }
 }
 
 function handleDeleteTodo(todo) {

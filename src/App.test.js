@@ -6,10 +6,22 @@ import { render, screen } from '@testing-library/vue'
 import App from './App.vue'
 import userEvent from '@testing-library/user-event' // esta biblioteca se utiliza para simular eventos de usuario, como escribir texto en un input o hacer clic en un botón.
 import { describe, expect, test } from 'vitest'
+import { createTestingPinia } from "@pinia/testing";
+import { fn } from '@vitest/spy'
 
 describe('App', () => {
   test('should add a new todo when the user adds a todo', async () => {
-    render(App)
+    
+    render(App, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            createSpy: fn,
+            stubActions: false,
+          }),
+        ],
+      },
+    });
 
     // screen se utiliza para buscar elementos en la pantalla.
     expect(screen.queryByText('Hola')).toBeNull();

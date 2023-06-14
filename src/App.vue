@@ -1,21 +1,21 @@
 <script setup>
-import { ref } from 'vue';
 import TodoList from './components/TodoList.vue';
 import AddTodoButton from './components/AddTodoButton.vue';
+// import { todos, addNewTodo, deleteTodo } from './reactiveStore.js';
+import { useTodoListStore } from './piniaStore.js';
 
-// Referencia mutable (variable reactiva) que es un array vacío.
-const todos = ref([])
+const store = useTodoListStore();
 
-// Se actualiza automáticamente en la interfaz de usuario con la funcionalidad reactiva.
 function handleAddNewTodo(todo) {
   if (todo) {
-    todos.value.push(todo)
+    // addNewTodo(todo);
+    store.addNewTodo(todo);
   }
 }
 
 function handleDeleteTodo(todo) {
-  // Con filter se comprueba si cada elemento del array todos no es igual al valor pasado como argumento.
-  todos.value = todos.value.filter(el => el !== todo);
+  // deleteTodo(todo);
+  store.deleteTodo(todo);
 }
 </script>
 
@@ -26,7 +26,7 @@ function handleDeleteTodo(todo) {
     <AddTodoButton @add-new-todo="handleAddNewTodo" />
     <!-- delete-todo: evento personalizado que se maneja con handleDeleteTodo -->
     <!-- Con ":" se enlaza la propiedad todos del componente TodoList con la variable todos del componente padre -->
-    <TodoList :todos=todos @delete-todo='handleDeleteTodo' />
+    <TodoList :todos=store.todos @delete-todo='handleDeleteTodo' />
   </div>
 </template>
 
